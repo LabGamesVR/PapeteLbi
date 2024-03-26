@@ -202,7 +202,7 @@ fn main() {
         if args[1] == "coleta" {
             let num = args.get(2).map(String::as_str).unwrap_or("1");
             let num = if num == "1" { 1 } else { 2 };
-            let dados = coleta(num, 5);
+            let dados = coleta(num, 2);
             csv_helper::salvar_dados("papete.csv", &dados).unwrap();
         } else if args[1] == "teste" {
             let outro_arg = args.get(2).map(String::as_str).unwrap_or("arvore");
@@ -225,7 +225,7 @@ fn main() {
                 println!("argumento não reconhecido");
             }
         } else {
-            println!("argumento não reconhecido");
+            println!("argumento não reconhecido ({})",args[1]);
         }
     }
 }
