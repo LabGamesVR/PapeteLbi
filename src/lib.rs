@@ -8,7 +8,9 @@ pub mod neural;
 pub mod papete;
 pub mod previsor;
 
-use std::ffi::{CStr, CString};
+pub mod comm;
+
+use std::ffi::CString;
 use std::os::raw::c_char;
 
 use conexao::Conexao;
@@ -123,16 +125,9 @@ pub unsafe extern "C" fn listar_conexoes_atuais(s: *mut Papete, array_ptr: *mut 
 Conecta na porta especificada
 */
 #[no_mangle]
-pub unsafe extern "C" fn conectar(s: *mut Papete, porta_chars: *const c_char) -> bool {
-    let c_str = unsafe {
-        assert!(!s.is_null());
-        CStr::from_ptr(porta_chars)
-    };
-
-    let r_str = String::from(c_str.to_str().unwrap());
-
-    let porta = Conexao::USB(r_str);
-    (*s).conectar(porta)
+pub unsafe extern "C" fn conectar(_s: *mut Papete, _porta_chars: *const c_char) -> bool {
+    println!("Inutilizado");
+    true
 }
 
 #[no_mangle]

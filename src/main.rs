@@ -19,6 +19,8 @@ mod neural;
 mod papete;
 mod previsor;
 
+mod comm;
+
 extern crate rand;
 extern crate statistical;
 
@@ -57,6 +59,24 @@ fn teste_serial() {
             print!("{}", dados.1.unwrap());
         }
         println!("");
+    }
+}
+
+fn teste_reconhecimento(){
+    let intervalo = time::Duration::from_millis(50);
+    let n = Neural::carregar("papete.pt").unwrap();
+
+    let mut papete = Papete::com_previsor(Box::new(n));
+
+    papete.ativar_modo_conexao_imediata(2);
+    println!("Procurando papetes...");
+    while papete.obter_conexoes().len() < 1 {
+        thread::sleep(intervalo);
+    }
+    println!("Encontradas!");
+    loop {
+        let dados = papete.obter_movimento();
+        println!("{}", dados);
     }
 }
 
@@ -197,7 +217,8 @@ Interpreta os argumentos e chama os procedimentos correspondentes
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     if args.len() == 1 {
-        teste_serial();
+        // teste_serial();
+        teste_reconhecimento();
     } else {
         if args[1] == "coleta" {
             let num = args.get(2).map(String::as_str).unwrap_or("1");
