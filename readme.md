@@ -1,4 +1,6 @@
-Esse projeto busca facilitar a implantação de jogos usando a papete inteligente. 
+# PapeteLib
+
+Esse projeto busca facilitar a implantação de jogos usando a papete inteligente. Em projetos novos, sugiro usar o pacoteMovimento
 
 # script papete
 Na pasta arduino, é o que deve ser enviado para o arduino preso no pé.
